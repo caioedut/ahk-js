@@ -7,24 +7,28 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "test": "nodemon --exec ts-node test.ts",
+    "test": "jest",
     "build": "rimraf ./build && tsc"
   },
   "dependencies": {
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.17.12",
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@types/jest": "^27.5.1",
     "@types/node": "^16.9.1",
     "@types/uuid": "^8.3.1",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.0",
     "nodemon": "^2.0.12",
-    "prettier": "^2.4.0",
+    "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
+    "ts-jest": "^28.0.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   }

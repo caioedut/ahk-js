@@ -16,24 +16,22 @@ type MouseClick = {
   speed?: string;
   downOrUp?: string;
   relative?: string;
-}
+};
 
 type MouseMove = {
   x: number;
   y: number;
   speed?: string;
   relative?: string;
-}
-
+};
 
 type MouseGetPos = {
-  flag?: number
-}
+  flag?: number;
+};
 
 const Mouse = {
   click(options: MouseClick) {
-    const { whichButton, x, y, clickCount, speed, downOrUp, relative } =
-      options;
+    const { whichButton, x, y, clickCount, speed, downOrUp, relative } = options;
 
     const raw = `MouseClick, ${whichButton}, ${x}, ${y}, ${clickCount}, ${speed}, ${downOrUp}, ${relative}`;
     Ahk.run(raw);
@@ -49,15 +47,15 @@ const Mouse = {
     return this;
   },
   // TODO TYPE
-  getPos(options: MouseGetPos) {
-    const {  flag } = options;
+  getPos(options?: MouseGetPos | null) {
+    const { flag = 0 } = options || {};
 
     const raw = `
       MouseGetPos, OutputVarX, OutputVarY, , , ${flag}
-      Output("{x: " OutputVarX ", y: " OutputVarY "}")
+      Output("{""x"": " OutputVarX ", ""y"": " OutputVarY "}")
     `;
 
-    return Ahk.run(raw);
+    return Ahk.run(raw, true);
   },
 };
 

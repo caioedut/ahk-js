@@ -1,7 +1,6 @@
+import { spawnSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { spawnSync } from 'child_process';
-
 import { v4 as uuidv4 } from 'uuid';
 
 const scriptDir = '_temp';
@@ -11,7 +10,7 @@ if (!fs.existsSync(scriptDir)) {
 }
 
 const Ahk = {
-  run(raw: string) {
+  run(raw: string, json: boolean = false) {
     const uuid = uuidv4();
     const file = path.join(scriptDir, `${uuid}.ahk`);
 
@@ -33,7 +32,7 @@ const Ahk = {
     }
 
     fs.appendFileSync(file, script);
-    let buffer = spawnSync("lib\\ahk\\AutoHotkeyU64.exe", file);
+    let buffer: any = spawnSync('lib\\ahk\\AutoHotkeyU64.exe', [file]);
 
     if (returnValue) {
       buffer = fs.readFileSync(outFile);
@@ -42,13 +41,12 @@ const Ahk = {
 
     fs.unlinkSync(file);
 
-    return buffer.toString();
+    const response = buffer.toString();
+
+    return json ? JSON.parse(response) : response;
   },
   parseRaw(raw: string) {
     return raw.replace(/undefined|null/g, '');
-  },
-  parseResponse(response: string) {
-    return JSON.parse(response);
   },
 };
 
