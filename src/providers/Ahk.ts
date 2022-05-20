@@ -13,19 +13,14 @@ const Ahk = {
   run(raw: string) {
     const uuid = uuidv4();
     const file = path.join(scriptDir, `${uuid}.ahk`);
-    const returnValue = raw.includes('Print');
 
-    let script = raw.replace(/undefined|null/g, '');
+    const script = `
+      Print(str) {
+        FileAppend, %str%, *
+      }
 
-    if (returnValue) {
-      script = `
-        Print(str) {
-          FileAppend, %str%, *
-        }
-
-        ${script}
-      `;
-    }
+      ${raw.replace(/undefined|null/g, '')}
+    `;
 
     fs.appendFileSync(file, script);
 
