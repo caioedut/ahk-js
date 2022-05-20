@@ -1,6 +1,9 @@
 {
   "name": "ahk-js",
   "version": "0.0.1",
+  "description": "Autohotkey automation into NodeJS",
+  "author": "CaioEduT",
+  "repository": "https://github.com/caioedut/ahk-js",
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
@@ -8,17 +11,9 @@
     "build": "rimraf ./build && tsc"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "fs-extra": "^10.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
-    "@types/fs-extra": "^9.0.12",
     "@types/node": "^16.9.1",
     "@types/uuid": "^8.3.1",
     "eslint": "^7.32.0",
