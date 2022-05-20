@@ -5,8 +5,6 @@
   "license": "MIT",
   "scripts": {
     "test": "nodemon --exec ts-node test.ts",
-    "dev": "nodemon --exec ts-node server.ts",
-    "start": "npm run build && cross-env NODE_ENV=production node build/server.js",
     "build": "rimraf ./build && tsc"
   },
   "dependencies": {
