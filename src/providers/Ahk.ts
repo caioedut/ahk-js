@@ -10,43 +10,33 @@ if (!fs.existsSync(scriptDir)) {
 }
 
 const Ahk = {
-  run(raw: string, json: boolean = false) {
+  run(raw: string) {
     const uuid = uuidv4();
     const file = path.join(scriptDir, `${uuid}.ahk`);
+    const returnValue = raw.includes('Print');
 
-    const returnValue = raw.includes('Output');
-
-    let outFile: string = '';
-    let script = this.parseRaw(raw);
+    let script = raw.replace(/undefined|null/g, '');
 
     if (returnValue) {
-      outFile = path.join(scriptDir, `${uuid}.json`);
-
       script = `
-         Output(str) {
-          FileAppend, %str%, ${outFile}
-         }
+        Print(str) {
+          FileAppend, %str%, *
+        }
 
         ${script}
       `;
     }
 
     fs.appendFileSync(file, script);
-    let buffer: any = spawnSync('lib\\ahk\\AutoHotkeyU64.exe', [file]);
 
-    if (returnValue) {
-      buffer = fs.readFileSync(outFile);
-      fs.unlinkSync(outFile);
-    }
+    const buffer = spawnSync('lib\\ahk\\AutoHotkeyU64.exe', [file]);
+    const response = buffer.stdout.toString();
 
     fs.unlinkSync(file);
 
-    const response = buffer.toString();
+    const isJSON = ['{', '['].includes(response.trim().substr(0, 1));
 
-    return json ? JSON.parse(response) : response;
-  },
-  parseRaw(raw: string) {
-    return raw.replace(/undefined|null/g, '');
+    return isJSON ? JSON.parse(response) : response;
   },
 };
 

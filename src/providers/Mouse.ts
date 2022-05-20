@@ -52,10 +52,10 @@ const Mouse = {
 
     const raw = `
       MouseGetPos, OutputVarX, OutputVarY, , , ${flag}
-      Output("{""x"": " OutputVarX ", ""y"": " OutputVarY "}")
+      Print("{""x"": " OutputVarX ", ""y"": " OutputVarY "}")
     `;
 
-    return Ahk.run(raw, true);
+    return Ahk.run(raw);
   },
 };
 
