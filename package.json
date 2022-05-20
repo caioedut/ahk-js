@@ -1,6 +1,6 @@
 {
   "name": "ahk-js",
-  "version": "0.0.2",
+  "version": "0.0.22",
   "description": "Autohotkey automation into NodeJS",
   "author": "CaioEduT",
   "repository": "https://github.com/caioedut/ahk-js",
