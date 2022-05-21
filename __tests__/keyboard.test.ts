@@ -1,5 +1,5 @@
 import Keyboard from '../src/providers/Keyboard';
 
 test('Keyboard', () => {
-  // TODO: Keyboard tests
+  expect(Keyboard.getKeyState('Enter')).toEqual('0');
 });

@@ -36,6 +36,14 @@ const Keyboard = {
     Ahk.run(`SendInput, ${parsed}`);
     return this;
   },
+  getKeyState(key: string, mode?: 'P' | 'T') {
+    const raw = `
+      Response := GetKeyState("${key}", "${mode}")
+      Print(Response)
+    `;
+
+    return Ahk.run(raw);
+  },
 };
 
 export default Keyboard;

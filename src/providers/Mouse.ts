@@ -1,17 +1,11 @@
 import Ahk from './Ahk';
 
-enum ClickButtonEnum {
-  left,
-  right,
-  middle,
-  x1,
-  x2,
-}
+type MouseButton = 'left' | 'right' | 'middle' | 'x1' | 'x2';
 
 type MouseClick = {
-  whichButton?: ClickButtonEnum;
   x?: number;
   y?: number;
+  button?: MouseButton;
   clickCount?: string;
   speed?: string;
   downOrUp?: string;
@@ -25,15 +19,21 @@ type MouseMove = {
   relative?: string;
 };
 
+type MouseDrag = MouseMove & {
+  toX: number;
+  toY: number;
+  button?: MouseButton;
+};
+
 type MouseGetPos = {
   flag?: number;
 };
 
 const Mouse = {
-  click(options: MouseClick) {
-    const { whichButton, x, y, clickCount, speed, downOrUp, relative } = options;
+  click(options?: MouseClick) {
+    const { button, x, y, clickCount, speed, downOrUp, relative } = options || {};
 
-    const raw = `MouseClick, ${whichButton}, ${x}, ${y}, ${clickCount}, ${speed}, ${downOrUp}, ${relative}`;
+    const raw = `MouseClick, ${button}, ${x}, ${y}, ${clickCount}, ${speed}, ${downOrUp}, ${relative}`;
     Ahk.run(raw);
 
     return this;
@@ -46,8 +46,15 @@ const Mouse = {
 
     return this;
   },
-  // TODO TYPE
-  getPos(options?: MouseGetPos | null) {
+  drag(options: MouseDrag) {
+    const { x, y, toX, toY, button, speed, relative } = options;
+
+    const raw = `MouseClickDrag, ${button}, ${x}, ${y}, ${toX}, ${toY}, ${speed}, ${relative}`;
+    Ahk.run(raw);
+
+    return this;
+  },
+  getPos(options?: MouseGetPos) {
     const { flag = 0 } = options || {};
 
     const raw = `
