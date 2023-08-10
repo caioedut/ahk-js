@@ -1,16 +1,20 @@
 import Ahk from './Ahk';
 
 interface KeyboardModifierKeys {
+  alt?: boolean;
   ctrl?: boolean;
   shift?: boolean;
-  alt?: boolean;
   win?: boolean;
 }
 
 const Keyboard = {
-  type(text: string) {
-    Ahk.run(`Send, ${text}`);
-    return this;
+  getKeyState(key: string, mode?: 'P' | 'T') {
+    const raw = `
+      Response := GetKeyState("${key}", "${mode}")
+      Print(Response)
+    `;
+
+    return Ahk.run(raw);
   },
   send(keys: string, modifierKeys: KeyboardModifierKeys = {}) {
     let parsed = '';
@@ -36,13 +40,9 @@ const Keyboard = {
     Ahk.run(`SendInput, ${parsed}`);
     return this;
   },
-  getKeyState(key: string, mode?: 'P' | 'T') {
-    const raw = `
-      Response := GetKeyState("${key}", "${mode}")
-      Print(Response)
-    `;
-
-    return Ahk.run(raw);
+  type(text: string) {
+    Ahk.run(`Send, ${text}`);
+    return this;
   },
 };
 

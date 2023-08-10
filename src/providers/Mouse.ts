@@ -1,28 +1,28 @@
 import Ahk from './Ahk';
 
-type MouseButton = 'left' | 'right' | 'middle' | 'x1' | 'x2';
+type MouseButton = 'left' | 'middle' | 'right' | 'x1' | 'x2';
 
 type MouseClick = {
+  button?: MouseButton;
+  count?: string;
+  downOrUp?: '' | 'D' | 'U';
+  relative?: string;
+  speed?: string;
   x?: number;
   y?: number;
-  button?: MouseButton;
-  clickCount?: string;
-  speed?: string;
-  downOrUp?: string;
-  relative?: string;
 };
 
 type MouseMove = {
+  relative?: string;
+  speed?: string;
   x: number;
   y: number;
-  speed?: string;
-  relative?: string;
 };
 
 type MouseDrag = MouseMove & {
+  button?: MouseButton;
   toX: number;
   toY: number;
-  button?: MouseButton;
 };
 
 type MouseGetPos = {
@@ -31,23 +31,15 @@ type MouseGetPos = {
 
 const Mouse = {
   click(options?: MouseClick) {
-    const { button, x, y, clickCount, speed, downOrUp, relative } = options || {};
+    const { button, count, downOrUp, relative, speed, x, y } = options || {};
 
-    const raw = `MouseClick, ${button}, ${x}, ${y}, ${clickCount}, ${speed}, ${downOrUp}, ${relative}`;
-    Ahk.run(raw);
-
-    return this;
-  },
-  move(options: MouseMove) {
-    const { x, y, speed, relative } = options;
-
-    const raw = `MouseMove, ${x}, ${y}, ${speed}, ${relative}`;
+    const raw = `MouseClick, ${button}, ${x}, ${y}, ${count}, ${speed}, ${downOrUp}, ${relative}`;
     Ahk.run(raw);
 
     return this;
   },
   drag(options: MouseDrag) {
-    const { x, y, toX, toY, button, speed, relative } = options;
+    const { button, relative, speed, toX, toY, x, y } = options;
 
     const raw = `MouseClickDrag, ${button}, ${x}, ${y}, ${toX}, ${toY}, ${speed}, ${relative}`;
     Ahk.run(raw);
@@ -63,6 +55,14 @@ const Mouse = {
     `;
 
     return Ahk.run(raw);
+  },
+  move(options: MouseMove) {
+    const { relative, speed, x, y } = options;
+
+    const raw = `MouseMove, ${x}, ${y}, ${speed}, ${relative}`;
+    Ahk.run(raw);
+
+    return this;
   },
 };
 
