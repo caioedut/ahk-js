@@ -1,25 +1,50 @@
-CURRENT IN DEVELOPMENT
+> CURRENT IN DEVELOPMENT
 
-``yarn install ahk-js`` or ``npm install ahk-js``
+> PULL REQUESTS ARE WELCOME!
 
-## Providers
 
-### Mouse
+# Install
+```shell
+npm install ahk-js
+# OR
+yarn add ahk-js
+```
 
-### click(options: Object)
+# Usage
+You can import providers like:
+```typescript
+import { Keyboard, Mouse, Window } from 'ahk-js';
+```
+
+## Mouse
+
+### click
 ```typescript
 Mouse.click({
-  whichButton?: Enum(left|right|middle);
+  button?: 'left' | 'middle' | 'right' | 'x1' | 'x2';
   x?: number;
   y?: number;
-  clickCount?: string;
+  count?: string;
   speed?: string;
-  downOrUp?: string;
+  downOrUp?: '' | 'D' | 'U';
   relative?: string;
 })
 ```
 
-### move(options: Object)
+### drag
+```typescript
+Mouse.drag({
+  button?: 'left' | 'middle' | 'right' | 'x1' | 'x2';
+  x: number;
+  y: number;
+  toX: number;
+  toY: number;
+  speed?: string;
+  relative?: string;
+})
+```
+
+### move
 ```typescript
 Mouse.move({
   x: number;
@@ -29,26 +54,115 @@ Mouse.move({
 })
 ```
 
-### getPos(options: Object)
+### getPos
 ```typescript
 Mouse.getPos({
   flag?: number
 })
 ```
 
-### Keyboard
+## Keyboard
 
-### type(text: string)
+### type
 ```typescript
 Keyboard.type(text: string)
 ```
 
-### send(keys: string, modifierKeys: Object)
+### send
 ```typescript
 Keyboard.send(keys: string, {
   ctrl?: boolean;
   shift?: boolean;
   alt?: boolean;
   win?: boolean;
+})
+```
+
+### getKeyState
+```typescript
+Keyboard.getPos(key: string, mode?: 'P' | 'T')
+```
+
+## Window
+
+### activate
+```typescript
+Window.activate({
+  title?: ahk_class | ahk_id | ahk_pid | ahk_exe | string;
+  text?: string;
+  excludeTitle?: string;
+  excludeText?: string;
+})
+```
+
+### close
+```typescript
+Window.close({
+  title?: ahk_class | ahk_id | ahk_pid | ahk_exe | string;
+  text?: string;
+  excludeTitle?: string;
+  excludeText?: string;
+  secondsToWait?: number;
+})
+```
+
+### exist
+```typescript
+Window.exist({
+  title?: ahk_class | ahk_id | ahk_pid | ahk_exe | string;
+  text?: string;
+  excludeTitle?: string;
+  excludeText?: string;
+})
+```
+
+### hide
+```typescript
+Window.hide({
+  title?: ahk_class | ahk_id | ahk_pid | ahk_exe | string;
+  text?: string;
+  excludeTitle?: string;
+  excludeText?: string;
+})
+```
+
+### kill
+```typescript
+Window.kill({
+  title?: ahk_class | ahk_id | ahk_pid | ahk_exe | string;
+  text?: string;
+  excludeTitle?: string;
+  excludeText?: string;
+  secondsToWait?: number;
+})
+```
+
+### maximize
+```typescript
+Window.maximize({
+  title?: ahk_class | ahk_id | ahk_pid | ahk_exe | string;
+  text?: string;
+  excludeTitle?: string;
+  excludeText?: string;
+})
+```
+
+### minimize
+```typescript
+Window.minimize({
+  title?: ahk_class | ahk_id | ahk_pid | ahk_exe | string;
+  text?: string;
+  excludeTitle?: string;
+  excludeText?: string;
+})
+```
+
+### restore
+```typescript
+Window.restore({
+  title?: ahk_class | ahk_id | ahk_pid | ahk_exe | string;
+  text?: string;
+  excludeTitle?: string;
+  excludeText?: string;
 })
 ```
