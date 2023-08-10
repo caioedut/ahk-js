@@ -1,6 +1,6 @@
 {
   "name": "ahk-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Autohotkey automation into NodeJS",
   "keywords": [
     "ahk",
@@ -17,8 +17,8 @@
     "email": "caioedut@gmail.com"
   },
   "files": [
-      "dist"
-    ],
+    "dist"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
