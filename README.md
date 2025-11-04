@@ -80,7 +80,7 @@ Keyboard.send(keys: string, {
 
 ### getKeyState
 ```typescript
-Keyboard.getPos(key: string, mode?: 'P' | 'T')
+Keyboard.getKeyState(key: string, mode?: 'P' | 'T')
 ```
 
 ## Window
